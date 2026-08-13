@@ -146,3 +146,12 @@ def _validate(cfg: Config, quiet: bool = False) -> None:
         ratio = cfg.total_document_count / cfg.synthetic_user_count
         print(f"[config] average sessions/user = {ratio:.1f} "
               f"({cfg.total_document_count:,} docs / {cfg.synthetic_user_count:,} users)")
+        # Print the knobs that actually shape the read distribution — makes it
+        # obvious at startup whether an .env change took effect.
+        print(f"[config] access pattern: HOT_ACCESS_SHARE={cfg.hot_access_share:g} "
+              f"HOT_SET_RATIO={cfg.hot_set_ratio:g}  "
+              f"(reads: {cfg.hot_access_share*100:.0f}% into most recent "
+              f"{cfg.hot_set_ratio*100:.0f}% of sessions)")
+        print(f"[config] workload: LOCUST_USERS={cfg.locust_users} "
+              f"TARGET_READ_RPS={cfg.target_read_rps} "
+              f"WRITE_RATIO={cfg.write_ratio:g}")
