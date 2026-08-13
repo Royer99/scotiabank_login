@@ -1,0 +1,11 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.load_checkpoint.json*
+.smoke_checkpoint.json*
+results*
+*.csv
+*.png
+*.html
+.pytest_cache/
