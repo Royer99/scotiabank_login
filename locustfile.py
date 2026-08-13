@@ -41,6 +41,12 @@ from model import (  # noqa: E402
     user_id,
 )
 
+# Registers Locust test_start / test_stop listeners that sample WT cache
+# hit ratio for the duration of the run — no separate script needed. Set
+# WT_CACHE_WATCH_ENABLED=false in .env to skip (e.g. on Free/Shared tiers
+# where serverStatus is restricted).
+import cache_hooks  # noqa: E402,F401
+
 CFG = load_config()
 CLIENT: MongoClient = MongoClient(
     CFG.mongodb_uri,
